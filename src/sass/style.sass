@@ -11,6 +11,7 @@ html, body
     margin: 0 auto
     height: 100%
 
+
 header
     margin: 0 auto
     width: 100%
@@ -92,6 +93,7 @@ button
     border: 2px solid black
         radius: 5px
 
+
 .buttons
     display: flex
     justify-content: center
@@ -109,18 +111,16 @@ button
         width: 310px
         margin: 10px
         flex-wrap: wrap
+    a
+        font:
+            family: Lato-Regular, sans-serif
+            size: 14px
+        margin: 5px
+    div p
+        &:nth-child(1)
+            text-align: center
+            color: green
+        &:nth-child(3n+2)
+            text-align: center
+            color: red
 
-.articles a
-    font-family: Lato-Regular, sans-serif
-    font-size: 14px
-    margin: 5px
-
-
-.articles div p:nth-child(1)
-    text-align: center
-    color: green
-
-
-.articles div p:nth-child(3n+2)
-    text-align: center
-    color: red

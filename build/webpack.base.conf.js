@@ -30,29 +30,29 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: '/node_modules/'
             },
-            // {
-            //     test: /\.css$/,
-            //     use: [
-            //         'style-loader',
-            //         MiniCssExtractPlugin.loader,
-            //         {
-            //             loader: 'css-loader',
-            //             options: {
-            //                 sourceMap: true
-            //             }
-            //         },
-            //         {
-            //             loader: 'postcss-loader',
-            //             options: {
-            //                 sourceMap: true,
-            //                 config: {
-            //                     path: `${PATHS.src}/js/postcss.config.js`
-            //                 }
-            //             }
-            //         }
-            //     ]
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true,
+                            config: {
+                                path: `${PATHS.src}/js/postcss.config.js`
+                            }
+                        }
+                    }
+                ]
 
-            // },
+            },
             {
                 test: /\.sass$/,
                 use: [
