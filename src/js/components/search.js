@@ -9,9 +9,27 @@ export default async function search() {
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
     const currentDate = `${year}-${month}-${date}`;
+    const responseNews = await fetch(`https://newsapi.org/v2/everything?sources=${valueResource}&from=${currentDate}&to=${currentDate}&pageSize=100&sortBy=popularity&apiKey=444`);
 
-    const responseNews = await fetch(`https://newsapi.org/v2/everything?sources=${valueResource}&from=${currentDate}&to=${currentDate}&pageSize=100&sortBy=popularity&apiKey=${API}`);
-    const jsonNews = await responseNews.json();
+	if (responseNews.ok === false) {
+		import(/* webpackChunkName: "lazyLoaderError" */ './lazyLoaderError').then(module => {
+			const Error = module.default;
+			let newError = new Error(responseNews.statusText);
+			newError.showError();
+			newError.hideError();
+		});
+	} else {
+		const jsonNews = await responseNews.json();
 
-    return jsonNews.articles;
+	    if (jsonNews.length > 100) {
+			import(/* webpackChunkName: "lazyLoaderError" */ './lazyLoaderError').then(module => {
+				let Error = module.default;
+			    let newError = new Error('Error. You got more than 100 articles');
+			    newError.showError();
+                newError.hideError();
+			});
+		} else {
+			return jsonNews.articles;
+		}
+	}
 }

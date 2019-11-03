@@ -3,10 +3,19 @@ import drawArticles from './drawArticles';
 import { setCurrentData } from './showArticles';
 
 function drawFirstArticles() {
+	document.querySelector('.articles').innerHTML = '';
     search().then((res) => {
         drawArticles(res, 0, 10);
         setCurrentData(res, 0, 10);
-    }, (err) => { console.log(err); });
+	})
+	// .catch((err) => {
+	// 	import(/* webpackChunkName: "lazyLoaderError" */ './lazyLoaderError').then(module => {
+	// 		let Error = module.default;
+	// 		let newError = new Error(err);
+	// 		newError.showError();
+	// 		newError.hideError();
+	// 	});
+	// })
 }
 
 export default function setSources(sources) {
@@ -18,5 +27,5 @@ export default function setSources(sources) {
     });
     document.querySelector('#sources').disabled = false;
     document.querySelector('#search').disabled = false;
-    document.querySelector('#search').addEventListener('click', drawFirstArticles);
+	document.querySelector('#search').addEventListener('click', drawFirstArticles);
 }
