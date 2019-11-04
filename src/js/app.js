@@ -1,13 +1,13 @@
 import { API } from './components/api';
 import setSources from './components/setSources';
-import RequestsFactory from './components/factoryRequests';
+import proxy from './components/proxyFactoryRequests';
 import '../sass/style.sass';
 
 async function getSources() {
-    document.querySelector('#search').disabled = true;
+	document.querySelector('#search').disabled = true;
+
 	const language = document.querySelector('input[name="language"]:checked').value;
-	const newRequest = new RequestsFactory();
-	const response = await newRequest.createRequest(`https://newsapi.org/v2/sources?language=${language}&apiKey=${API}`, 'GET').sendRequest();
+	const response = await proxy.createRequest(`https://newsapi.org/v2/sources?language=${language}&apiKey=${API}`, 'GET').sendRequest();
 
 	if (response.ok === false) {
 		import(/* webpackChunkName: "lazyLoaderError" */ './components/lazyLoaderError').then(module => {
