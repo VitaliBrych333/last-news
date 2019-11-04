@@ -1,4 +1,5 @@
 import { API } from './api';
+import RequestsFactory from './factoryRequests';
 
 export default async function search() {
     document.querySelector('#button').innerHTML = '';
@@ -8,9 +9,10 @@ export default async function search() {
     const date = new Date().getDate();
     const month = new Date().getMonth();
     const year = new Date().getFullYear();
-    const currentDate = `${year}-${month}-${date}`;
-    const responseNews = await fetch(`https://newsapi.org/v2/everything?sources=${valueResource}&from=${currentDate}&to=${currentDate}&pageSize=100&sortBy=popularity&apiKey=444`);
-
+	const currentDate = `${year}-${month}-${date}`;
+	const newRequest = new RequestsFactory();
+	const responseNews = await newRequest.createRequest(`https://newsapi.org/v2/everything?sources=${valueResource}&from=${currentDate}&to=${currentDate}&pageSize=100&sortBy=popularity&apiKey=${API}`, 'GET').sendRequest();
+	
 	if (responseNews.ok === false) {
 		import(/* webpackChunkName: "lazyLoaderError" */ './lazyLoaderError').then(module => {
 			const Error = module.default;
