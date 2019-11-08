@@ -3,6 +3,7 @@ import setSources from './components/setSources';
 import proxy from './components/proxyFactoryRequests';
 import '../sass/style.sass';
 
+
 async function getSources() {
 	document.querySelector('#search').disabled = true;
 
@@ -12,9 +13,10 @@ async function getSources() {
 	if (response.ok === false) {
 		import(/* webpackChunkName: "lazyLoaderError" */ './components/lazyLoaderError').then(module => {
 			const Error = module.default;
-			let newError = new Error(responseNews.statusText);
+			let newError = new Error(response.statusText);
 			newError.showError();
-            newError.hideError();
+			newError.hideError();
+
 		});
 	} else {
 		const myJson = await response.json();
@@ -36,3 +38,6 @@ async function getSources() {
 window.onload = () => {
     document.querySelectorAll('input[name="language"]').forEach(item => item.addEventListener('click', getSources));
 };
+
+
+
